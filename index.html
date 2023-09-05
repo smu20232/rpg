@@ -1,15 +1,3 @@
-const express = require('express')
-const app = express()
-const port = process.env.PORT || 3001
-
-app.get('/', (req, res) => res.type('html').send(html))
-
-const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`))
-
-server.keepAliveTimeout = 120 * 1000
-server.headersTimeout = 120 * 1000
-
-const html = `
 <!DOCTYPE html>
 <html>
   <head>
@@ -33,7 +21,7 @@ const html = `
     }
     window.onload = function () {
       google.accounts.id.initialize({
-        client_id: "537386322782-tagg8qjf15m40j6k7snrj69g9nim92v6.apps.googleusercontent.com",
+        client_id: "YOUR_GOOGLE_CLIENT_ID",
         callback: handleCredentialResponse
       });
       google.accounts.id.renderButton(
@@ -43,6 +31,8 @@ const html = `
       google.accounts.id.prompt(); // also display the One Tap dialog
     }
 </script>
+<div id="conteudo"></div>
+
 <div id="buttonDiv"></div> 
 
     <style>
@@ -78,4 +68,3 @@ const html = `
     </section>
   </body>
 </html>
-`
