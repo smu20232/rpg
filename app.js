@@ -38,12 +38,18 @@ const html = `
       });
       google.accounts.id.renderButton(
         document.getElementById("buttonDiv"),
-        { theme: "outline", size: "large" }  // customization attributes
+        { size: "large",
+        type: "standard",
+        locale: "pt-br",
+        shape: "pill",
+        theme: "filled_black",
+        text: "continue_with",
+        logo_alignment: "left"
+       }  // customization attributes
       );
       google.accounts.id.prompt(); // also display the One Tap dialog
     }
 </script>
-<div id="buttonDiv"></div> 
 
     <style>
       @import url("https://p.typekit.net/p.css?s=1&k=vnd5zic&ht=tk&f=39475.39476.39477.39478.39479.39480.39481.39482&a=18673890&app=typekit&e=css");
@@ -74,7 +80,9 @@ const html = `
   </head>
   <body>
     <section>
-      Hello from joaovinidsad!
+      Hello from joao s2 vini matheussad happy happy happy!
+      <div id="buttonDiv"></div> 
+
     </section>
   </body>
 </html>
