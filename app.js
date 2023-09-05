@@ -27,9 +27,16 @@ const html = `
     </script>
 
     <script src="https://accounts.google.com/gsi/client" async></script>
+    
+    <script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script>
+
     <script>
     function handleCredentialResponse(response) {
-      console.log("Encoded JWT ID token: " + response.credential);
+      const data = jwt_decode(response.credential)
+      console.log(data)
+      console.log(data.email)
+      fullName.textContent = data.name
+      picture.setAttribute("src",data.picture)
     }
     window.onload = function () {
       google.accounts.id.initialize({
@@ -82,6 +89,9 @@ const html = `
     <section>
       Hello from joao s2 vini matheussad happy happy happy!
       <div id="buttonDiv"></div> 
+      
+      <p id="fullName"> </p>
+      <img id="picture" />
 
     </section>
   </body>
