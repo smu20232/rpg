@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home</title>
+    <script>
+        const cookieValue = document.cookie.split('; ').find(cookie => cookie.startsWith('sessionData='));
+        if (cookieValue) {
+            const jsonString = decodeURIComponent(cookieValue.split('=')[1]);
+            const sessionData = JSON.parse(jsonString);
+            console.log(sessionData);
+        }
+    </script>
+    <script src="/main.js"></script>
+    <script src="/socket.io.js"></script>
+</head>
+
+<body>
+    <h1>Bem vindo, escolha uma sala.</h1>
+
+    <p>Click the button to redirect to another page:</p>
+    <button onclick="meuRegister()">Registro</button>
+</body>
+
+</html>
