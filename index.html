@@ -15,25 +15,36 @@
     </script>
 
     <script src="https://accounts.google.com/gsi/client" async></script>
+    
+    <script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script>
+
     <script>
     function handleCredentialResponse(response) {
-      console.log("Encoded JWT ID token: " + response.credential);
+      const data = jwt_decode(response.credential)
+      console.log(data)
+      console.log(data.email)
+      fullName.textContent = data.name
+      picture.setAttribute("src",data.picture)
     }
     window.onload = function () {
       google.accounts.id.initialize({
-        client_id: "YOUR_GOOGLE_CLIENT_ID",
+        client_id: "537386322782-tagg8qjf15m40j6k7snrj69g9nim92v6.apps.googleusercontent.com",
         callback: handleCredentialResponse
       });
       google.accounts.id.renderButton(
         document.getElementById("buttonDiv"),
-        { theme: "outline", size: "large" }  // customization attributes
+        { size: "large",
+        type: "standard",
+        locale: "pt-br",
+        shape: "pill",
+        theme: "filled_black",
+        text: "continue_with",
+        logo_alignment: "left"
+       }  // customization attributes
       );
       google.accounts.id.prompt(); // also display the One Tap dialog
     }
 </script>
-<div id="conteudo"></div>
-
-<div id="buttonDiv"></div> 
 
     <style>
       @import url("https://p.typekit.net/p.css?s=1&k=vnd5zic&ht=tk&f=39475.39476.39477.39478.39479.39480.39481.39482&a=18673890&app=typekit&e=css");
@@ -64,7 +75,12 @@
   </head>
   <body>
     <section>
-      Hello from joaovinidsad!
+      Hello from joao s2 vini matheussad happy happy happy!
+      <div id="buttonDiv"></div> 
+      
+      <p id="fullName"> </p>
+      <img id="picture" />
+
     </section>
   </body>
 </html>
