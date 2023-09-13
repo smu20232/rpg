@@ -21,10 +21,10 @@
 
 
   <script>
-    let data = { nome: 'Mike', username: 'mikeicd' };
-    console.log(data);
-    const data_json = JSON.stringify(data);
-    document.cookie = `sessionData=${encodeURIComponent(data_json)}; expires=Fri, 31 Dec 2023 23:59:59 GMT; path=/`;
+    //let data = { nome: 'Mike', username: 'mikeicd' };
+    //console.log(data);
+    //const data_json = JSON.stringify(data);
+    //document.cookie = `sessionData=${encodeURIComponent(data_json)}; expires=Fri, 31 Dec 2023 23:59:59 GMT; path=/`;
     function redirectToPage() {
       // Change the URL to the desired destination
       window.location.href = 'https://www.example.com/new-page.html';
@@ -39,8 +39,8 @@
       console.log(data.email)
       fullName.textContent = data.name
       picture.setAttribute("src", data.picture)
-      //const data_json = JSON.stringify(data);
-      //document.cookie = `sessionData=${encodeURIComponent(jsonString)}; expires=Fri, 31 Dec 2023 23:59:59 GMT; path=/`;
+      const data_json = JSON.stringify(data);
+      document.cookie = `sessionData=${encodeURIComponent(jsonString)}; expires=Fri, 31 Dec 2023 23:59:59 GMT; path=/`;
     }
     window.onload = function () {
       google.accounts.id.initialize({

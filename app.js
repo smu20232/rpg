@@ -23,6 +23,7 @@ server.headersTimeout = 120 * 1000
 io.on('connection', (socket) => {
     console.log('A client connected');
     socket.on('register', (registerData) => {
+        console.log(registerData)
         // Handle registration here
         // Insert registrationData into a database, perform validation, etc.
         // Emit a response back to the client if needed
@@ -32,4 +33,5 @@ io.on('connection', (socket) => {
         console.log('A client disconnected');
     });
 });
+
 
