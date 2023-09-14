@@ -23,8 +23,8 @@ io.on('connection', (socket) => {
 
     socket.on('register', (registerData) => {
         console.log(registerData)
-        if (registerData.email){
-            res.redirect('/sala');
+        if (registerData.email) {
+            socket.emit('redirect', 'sala');
         }
     });
 

@@ -24,10 +24,6 @@ function sendRegister() {
     socket.emit('register', data);
 };
 
-function redirectToPage(page) {
-    window.location.href = page;
-}
-
 function handleCredentialResponse(response) {
     const data = jwt_decode(response.credential)
     console.log(data)
@@ -36,7 +32,7 @@ function handleCredentialResponse(response) {
     picture.setAttribute("src", data.picture)
     const data_json = JSON.stringify(data);
     document.cookie = `sessionData=${encodeURIComponent(data_json)}; expires=Fri, 31 Dec 2023 23:59:59 GMT; path=/`;
-    redirectToPage('home')
+    window.location.href = 'home';
 }
 
 function loadGoogleOauth() {
@@ -58,3 +54,7 @@ function loadGoogleOauth() {
     );
     google.accounts.id.prompt(); // also display the One Tap dialog
 }
+
+socket.on('redirect', (url) => {
+    window.location.href = url;
+});
