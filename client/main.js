@@ -2,7 +2,6 @@ console.log('main.js');
 
 const socket = io();
 
-
 function get_user_data(mode) {
     var data = undefined
     const cookieValue = document.cookie.split('; ').find(cookie => cookie.startsWith('sessionData='));
@@ -20,8 +19,17 @@ function get_user_data(mode) {
 }
 
 function sendRegister() {
-    data = get_user_data()
-    socket.emit('register', data);
+    data = get_user_data();
+    sala = 'sala1';
+    let reg_msg = {
+        Max: 1,
+        To: '<rpg3:${sala}@rpg-3fg3.onrender.com>',
+        From: '<rpg3:${data.email}>',
+        CallID: data.email,
+        Expiress: '3600'
+    }
+
+    socket.emit('register', reg_msg);
 };
 
 function handleCredentialResponse(response) {
