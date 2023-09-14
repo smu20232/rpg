@@ -23,8 +23,8 @@ function sendRegister() {
     sala = 'sala1';
     let reg_msg = {
         Max: 1,
-        To: '<rpg6:${sala}@rpg-3fg3.onrender.com>',
-        From: '<rpg6:${data.email}>',
+        To: '<' + sala + '@rpg-3fg3.onrender.com>',
+        From: '<' + data.email+'>',
         CallID: data.email,
         Expires: '3600'
     }
@@ -40,7 +40,7 @@ function handleCredentialResponse(response) {
     picture.setAttribute("src", data.picture)
     const data_json = JSON.stringify(data);
     document.cookie = `sessionData=${encodeURIComponent(data_json)}; expires=Fri, 31 Dec 2023 23:59:59 GMT; path=/`;
-    window.location.href = 'home';
+    window.location.href = 'home.html';
 }
 
 function loadGoogleOauth() {

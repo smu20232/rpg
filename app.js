@@ -5,12 +5,13 @@ const port = process.env.PORT || 3001
 const socketIo = require('socket.io');
 
 
-app.get('/', (req, res) => res.type('html').sendFile(path.join(__dirname, '/client/index.html')));
-app.get('/home', (req, res) => res.type('html').sendFile(path.join(__dirname, '/client/home.html')));
-app.get('/main.js', (req, res) => res.type('application/javascript').sendFile(path.join(__dirname, '/client/main.js')));
-app.get('/styles.css', (req, res) => res.type('text/css').sendFile(path.join(__dirname, '/client/styles.css')));
-app.get('/sala', (req, res) => res.type('html').sendFile(path.join(__dirname, '/client/sala.html')));
+//app.get('/', (req, res) => res.type('html').sendFile(path.join(__dirname, '/client/index.html')));
+//app.get('/home', (req, res) => res.type('html').sendFile(path.join(__dirname, '/client/home.html')));
+//app.get('/main.js', (req, res) => res.type('application/javascript').sendFile(path.join(__dirname, '/client/main.js')));
+//app.get('/styles.css', (req, res) => res.type('text/css').sendFile(path.join(__dirname, '/client/styles.css')));
+//app.get('/sala', (req, res) => res.type('html').sendFile(path.join(__dirname, '/client/sala.html')));
 
+app.use(express.static('./client/'))
 
 const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 const io = socketIo(server);
@@ -25,7 +26,7 @@ io.on('connection', (socket) => {
         console.log(registerData)
         if (registerData.Max && registerData.To && registerData.From && registerData.CallID && registerData.Expires) {
 
-            socket.emit('redirect', 'sala');
+            socket.emit('redirect', 'sala.html');
         }
     });
 
