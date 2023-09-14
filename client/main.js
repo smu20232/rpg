@@ -21,16 +21,25 @@ function get_user_data(mode) {
 function sendRegister() {
     data = get_user_data();
     sala = 'sala1';
+    date = new Date().getTime()
+
+    
+    saveCookie('callID',data.email+date)
+
     let reg_msg = {
         Max: 1,
         To: '<' + sala + '@rpg-3fg3.onrender.com>',
         From: '<' + data.email+'>',
-        CallID: data.email,
+        CallID: data.email+date, //FIXME alterar para algo melhor dois!!!
         Expires: '3600'
     }
 
     socket.emit('register', reg_msg);
 };
+
+function saveCookie(key,data){
+    document.cookie = `${key}=${data}; expires=Fri, 31 Dec 2023 23:59:59 GMT; path=/`;
+}
 
 function handleCredentialResponse(response) {
     const data = jwt_decode(response.credential)
@@ -39,7 +48,8 @@ function handleCredentialResponse(response) {
     fullName.textContent = data.name
     picture.setAttribute("src", data.picture)
     const data_json = JSON.stringify(data);
-    document.cookie = `sessionData=${encodeURIComponent(data_json)}; expires=Fri, 31 Dec 2023 23:59:59 GMT; path=/`;
+    saveCookie('sessionData',encodeURIComponent(data_json))
+
     window.location.href = 'home.html';
 }
 
