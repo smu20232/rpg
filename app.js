@@ -23,7 +23,8 @@ io.on('connection', (socket) => {
 
     socket.on('register', (registerData) => {
         console.log(registerData)
-        if (registerData.email) {
+        if (registerData.Max && registerData.To && registerData.From && registerData.CallID && registerData.Expires) {
+
             socket.emit('redirect', 'sala');
         }
     });

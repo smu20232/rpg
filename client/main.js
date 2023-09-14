@@ -23,10 +23,10 @@ function sendRegister() {
     sala = 'sala1';
     let reg_msg = {
         Max: 1,
-        To: '<rpg3:${sala}@rpg-3fg3.onrender.com>',
-        From: '<rpg3:${data.email}>',
+        To: '<rpg6:${sala}@rpg-3fg3.onrender.com>',
+        From: '<rpg6:${data.email}>',
         CallID: data.email,
-        Expiress: '3600'
+        Expires: '3600'
     }
 
     socket.emit('register', reg_msg);
