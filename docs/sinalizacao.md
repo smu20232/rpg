@@ -48,6 +48,10 @@ As respostas possíveis a um registro incluem os seguintes códigos:
 - 486: Destino Indisponível
 - 500: Erro Interno do Servidor
 
+### CALL
+
+
+
 
 <!-- ## INVITE
 Estabelece uma sessão com outro host.
