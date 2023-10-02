@@ -11,7 +11,7 @@ const socketIo = require('socket.io');
 //app.get('/styles.css', (req, res) => res.type('text/css').sendFile(path.join(__dirname, '/client/styles.css')));
 //app.get('/sala', (req, res) => res.type('html').sendFile(path.join(__dirname, '/client/sala.html')));
 
-app.use(express.static('./client/'))
+app.use(express.static('./cliente/'))
 
 const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 const io = socketIo(server);
