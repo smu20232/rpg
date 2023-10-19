@@ -3,7 +3,7 @@
 A sinalização é baseada no [Protocolo de Iniciação de Sessão (SIP)](https://datatracker.ietf.org/doc/html/rfc3261) e utiliza mensagens via SocketIO para a comunicação. Esta documentação aborda os seguintes tópicos:
 
 - [Formato das Mensagens](#formato-das-mensagens)
-  - [Registro (REGISTER)](#registro-register)
+- [Registro (REGISTER)](#registro-register)
     - [Respostas](#respostas)
 
 
@@ -11,7 +11,7 @@ A sinalização é baseada no [Protocolo de Iniciação de Sessão (SIP)](https:
 
 As mensagens de sinalização são formatadas em JSON.
 
-### Registro (REGISTER)
+## Registro (REGISTER)
 
 O método REGISTER é usado para registrar um cliente no servidor, permitindo estabelecer conexões com outros hosts.
 
@@ -36,7 +36,7 @@ Expires: 3600
 | Call-ID      | string | Identificação da chamada   |
 | Expires      | int    | Tempo de validade          |
 
-#### Respostas
+### Respostas
 
 As respostas possíveis a um registro incluem os seguintes códigos:
 
@@ -48,7 +48,62 @@ As respostas possíveis a um registro incluem os seguintes códigos:
 - 486: Destino Indisponível
 - 500: Erro Interno do Servidor
 
-### CALL
+## Entrar na sala (joinRoom)
+
+
+O método `joinRoom` é utilizado pelo cliente para receber do servidor as informações necessárias para estabelecer uma conexão de midia com a sala escolhida.
+
+### Pedido
+No pedido é enviado o nome da sala que deseja fazer a conexão.
+
+### Resposta
+A resposta é uma lista de codecs suportados pelo servidor, chamado de `rtpCapabilities`.
+
+## Criar canal de transporte *sender* ou *consumer* (createWebRtcTransport)
+
+Este método é utilizado para criar um canal de midia do qual envia ou recebe dados do servidor. O paramâtro booleano `consumer` determina se o canal será configurado para receber ou enviar dados.
+
+### Pedido
+No pedido deve conter o comando `createWebRtcTransport` com o seguinte o paramêtro `consumer`:
+- Caso `consumer` ser atribuido o valor `false`, o canal é utilizado para enviar dados o servidor.
+- Caso `consumer` ser atribuido o valor `true`, o canal é utilizado para receber dados do servidor.
+### Resposta
+A resposta contém as informações necessárias para criar o canal.
+
+## Informa parametros DTLS (transport-connect)
+
+Este metódo é utilizado caso a criação de canal de transporte configurada como *sender* ocorrer com sucesso, ela serve para informar os parametros DTLS para iniciar uma conexão segura.
+
+### Pedido
+No pedido é passado o comando `transport-connect` com o paramêtro `dtlsParamaters` contendo as informações necessárias para estabelecer a conexão segura.
+
+## Informa parametros DTLS (transport-recv-connect)
+
+Este metódo é utilizado caso a criação de canal de transporte configurada como *consumer* ocorrer com sucesso, ela serve para informar os parametros DTLS e id do *consumer* para iniciar uma conexão segura.
+
+### Pedido
+No pedido é passado o comando `transport-recv-connect` com os seguintes paramêtros:
+- `dtlsParamaters`: Informações necessárias para estabelecer uma conexão segura;
+- `serverConsumerTransportId`: ID do *consumer*.
+
+## Criar um produtor (transport-produce)
+
+Este metódo é utilizado para solicitar ao server a criação de um `Producer`.
+
+### Pedido
+No pedido é passado o comando `transport-produce` com os paramêtros `kind`, `rtpParameters` e `appData`.
+### Resposta
+A resposta contém os seguintes paramêtros:
+- `id`: Código de id do *producer* criado no servidor.
+- `producersExist`: Paramêtro boolean informado se já existe um producer.
+
+## Lista Producers (getProducers)
+
+Metodo utilizado para receber os demais *producers* castrados no servidor.
+### Pedido
+No pedido é enviado o comando `getProducers`.
+### Resposta
+A resposta contém uma lista com os ids dos *producers*.
 
 
 
